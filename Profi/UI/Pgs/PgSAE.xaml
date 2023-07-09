@@ -1,0 +1,82 @@
+﻿<Page x:Class="Profi.UI.Pgs.PgSAE"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Profi.UI.Pgs"
+      mc:Ignorable="d" 
+      d:DesignHeight="780" d:DesignWidth="1400"
+      Title="Профи - Окно СДО">
+       
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="60"></RowDefinition>
+                </Grid.RowDefinitions>
+            <ScrollViewer>
+            <Canvas Name="PdfCanvas" Width="1400" Height="1200">
+
+                <StackPanel Background="#ffe4b5"  Height="1200" Width="1750">
+                    <StackPanel Background="#ffa07a" HorizontalAlignment="Center" Margin="0,50,350,0">
+                        <Grid Background="#ffa07a" Height="210" Width="800">
+                            <Image Margin="10" Height="200" Width="200">
+                                <Image.Source>
+                                    <Binding Path="Photo_Path">
+                                        <Binding.TargetNullValue>
+                                            <ImageSource>
+                                                /Resources/Images/nophoto.png
+                                            </ImageSource>
+                                        </Binding.TargetNullValue>
+                                    </Binding>
+                                </Image.Source>
+                            </Image>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock Style="{StaticResource TextBlockLabel}" Text="Название СДО:  "></TextBlock>
+                            <TextBlock Style="{StaticResource TextBlockLabel}" Width="500" FontSize="18" TextAlignment="Left" Name="TblNameSAE" Text="{Binding Name_SAE}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock Style="{StaticResource TextBlockLabel}" Text="Название контрагента:  "></TextBlock>
+                            <TextBlock Style="{StaticResource TextBlockLabel}" Width="500" FontSize="18" TextAlignment="Left" Text="{Binding Name_Contragent}" Name="TblNameContragent"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock Style="{StaticResource TextBlockLabel}" Padding="0,40,0,0" Height="120" Text="Матеариально-техническая база:  "></TextBlock>
+                            <TextBlock Style="{StaticResource TextBlockLabel}" Width="500" FontSize="18" TextAlignment="Left" Height="120" Name="TblMaterialBase" Text="{Binding Material_Base}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource TextBlockLabel}"  Text="Возраст учащихся:  "></TextBlock>
+                            <TextBlock Style="{StaticResource TextBlockLabel}" Width="500" FontSize="18" TextAlignment="Left" Name="TblAge" Text="{Binding Age}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource TextBlockLabel}" Text="Количество учащихся в группе:  "></TextBlock>
+                            <TextBlock Style="{StaticResource TextBlockLabel}" Width="500" FontSize="18" TextAlignment="Left" Name="TblCount" Text="{Binding Count}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource TextBlockLabel}" Padding="0,40,0,0" Height="120" Text="Описание программы:  "></TextBlock>
+                            <TextBlock Style="{StaticResource TextBlockLabel}" Width="500" FontSize="18" TextAlignment="Left" Height="120" Name="TblContent" Text="{Binding Content}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource TextBlockLabel}" Padding="0,40,0,0" Height="120" Text="Цели программы:  "></TextBlock>
+                            <TextBlock Style="{StaticResource TextBlockLabel}" Width="500" FontSize="18" TextAlignment="Left" Height="120" Name="TblResult" Text="{Binding Result}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource TextBlockLabel}" Text="Цена:  "></TextBlock>
+                            <TextBlock Style="{StaticResource TextBlockLabel}" Width="500" FontSize="18" TextAlignment="Left" Name="TblPrice" Text="{Binding Price}"></TextBlock>
+                        </StackPanel>
+              
+                       
+                    </StackPanel>
+                </StackPanel>
+    </Canvas>
+    </ScrollViewer>
+
+            <StackPanel Background="#ffe4b5" Name="StackButtons" Orientation="Horizontal" Grid.Row="1">
+
+                    <Button Style="{StaticResource ButtonMain}" Margin="10" Name="BtnEditSAE" Click="BtnEditSAE_Click">Редактировать</Button>
+                    <Button Name="BtnPdf" Style="{StaticResource ButtonMain}" Click="BtnPdf_Click">Экспорт PDF</Button>
+
+                </StackPanel>
+            </Grid>
+    
+
+</Page>

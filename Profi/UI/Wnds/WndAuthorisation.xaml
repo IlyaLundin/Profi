@@ -1,0 +1,39 @@
+﻿<Window x:Class="Profi.UI.Wnds.WndAuthorisation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Profi.UI.Wnds"
+        mc:Ignorable="d"
+        Title="Профи - Окно входа" Height="550" Width="310" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen">
+    <Grid Style="{StaticResource GridMain}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Height="100" Style="{StaticResource BorderMain}" TextAlignment="Center"
+                   Padding="25" Text=""/>
+        <TextBlock Style="{StaticResource TextBlockAutho}" VerticalAlignment="Top"
+                   Text="Вход в систему" FontSize="25" Margin="95,21,0,0"/>
+        <Image Height="70" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" Source="/Resources/Images/SuperStar.png"/>
+        <TextBlock Style="{StaticResource TextBlockAutho}" VerticalAlignment="Top" Text="Логин" Grid.Row="1" Margin="35,21,0,0"/>
+        <TextBox Padding="3" Style="{StaticResource TextBoxAutho}" Grid.Row="1" Name="TbxLogin" TextChanged="TbxLogin_TextChanged"
+                 Margin="20,0,0,34" />
+        <TextBlock Style="{StaticResource TextBlockAutho}" Visibility="Hidden" VerticalAlignment="Top" Text="Пароль" Grid.Row="2" Name="TblPassword" 
+                   RenderTransformOrigin="0.828,0.468" Margin="35,27,0,0" />
+        <TextBox Padding="3" Style="{StaticResource TextBoxAutho}" Grid.Row="2" Name="TbxPassword"  TextChanged="TbxPassword_TextChanged"
+                 Visibility="Hidden" Margin="20,0,0,35" />
+        <PasswordBox Style="{StaticResource PasswordBoxMain}" Grid.Row="2" Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged"
+                     Visibility="Hidden" Margin="20,0,0,35"/>
+        <CheckBox Padding="5" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20" Height="25"
+                  Width="25" Name="OpenPassword"  Checked="OpenPassword_Checked" Unchecked="OpenPassword_Unchecked" Visibility="Hidden"
+                  ToolTip="Показать пароль" IsChecked="False"/>
+        <Button Style="{StaticResource ButtonMain}" Grid.Row="3" Name="BtnLogIn" Content="Войти" Click="BtnLogIn_Click"
+                Visibility="Hidden" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Row="4" Style="{StaticResource BorderMain}"/>
+
+    </Grid>
+</Window>

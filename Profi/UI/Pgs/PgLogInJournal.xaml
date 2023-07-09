@@ -1,0 +1,34 @@
+﻿<Page x:Class="Profi.UI.Pgs.PgLogInJournal"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Profi.UI.Pgs"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PgLogInJournal">
+
+    <Grid>
+        <ListBox Name="JournalList" ItemsSource="{Binding LogInUsers}" Background="#ffe4b5" HorizontalContentAlignment="Center">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="215" Width="650" Margin="50" Background="#ffa07a" HorizontalAlignment="Center">
+
+
+                        <StackPanel Margin="10">
+
+                            <StackPanel Orientation="Horizontal" Margin="10">
+                                <TextBlock Text="Логин: " FontSize="18" FontFamily="Comic Sans MS"></TextBlock>
+                                <TextBlock Name="Tbllogin" Margin="4" Text="{Binding Login}" FontSize="15" FontFamily="Comic Sans MS"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10">
+                                <TextBlock Text="Дата и время: " FontSize="18" FontFamily="Comic Sans MS"></TextBlock>
+                                <TextBlock Name="TblTime" Margin="4" Text="{Binding LogInDateTime}" FontSize="15" FontFamily="Comic Sans MS"></TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Page>

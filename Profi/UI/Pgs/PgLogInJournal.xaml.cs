@@ -1,0 +1,31 @@
+﻿using Profi.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace Profi.UI.Pgs
+{
+    /// <summary>
+    /// Логика взаимодействия для PgLogInJournal.xaml
+    /// </summary>
+    public partial class PgLogInJournal : Page
+    {
+        public PgLogInJournal()
+        {
+            InitializeComponent();
+            JournalList.ItemsSource = ProfiDBEntities2.GetContext().LogInUsers.ToList();
+
+        }
+    }
+}

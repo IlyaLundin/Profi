@@ -1,0 +1,769 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ProfiDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Contragent">
+          <Key>
+            <PropertyRef Name="Id_Contragent" />
+          </Key>
+          <Property Name="Id_Contragent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Contragent" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contragent_User">
+          <Key>
+            <PropertyRef Name="Id_Role" />
+            <PropertyRef Name="Id_User" />
+            <PropertyRef Name="Id_Contragent" />
+          </Key>
+          <Property Name="Id_Role" Type="int" Nullable="false" />
+          <Property Name="Id_User" Type="int" Nullable="false" />
+          <Property Name="Id_Contragent" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LogInJournal">
+          <Key>
+            <PropertyRef Name="Id_User" />
+            <PropertyRef Name="LogInDateTime" />
+          </Key>
+          <Property Name="Id_User" Type="int" Nullable="false" />
+          <Property Name="LogInDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id_Role" />
+          </Key>
+          <Property Name="Id_Role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Role" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role_User">
+          <Key>
+            <PropertyRef Name="Id_Role" />
+            <PropertyRef Name="Id_User" />
+          </Key>
+          <Property Name="Id_Role" Type="int" Nullable="false" />
+          <Property Name="Id_User" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SAE">
+          <Key>
+            <PropertyRef Name="Id_SAE" />
+          </Key>
+          <Property Name="Id_SAE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_SAE" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Material_Base" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Result" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Profi_Point" Type="int" Nullable="false" />
+          <Property Name="Photo_Path" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="SAE_Contragent">
+          <Key>
+            <PropertyRef Name="Id_SAE" />
+            <PropertyRef Name="Id_Contragent" />
+          </Key>
+          <Property Name="Id_SAE" Type="int" Nullable="false" />
+          <Property Name="Id_Contragent" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id_User" />
+          </Key>
+          <Property Name="Id_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "ProfiDB.dbo.All_Contragents_User" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="All_Contragents_User">
+          <Key>
+            <PropertyRef Name="Login" />
+            <PropertyRef Name="Name_Contragent" />
+          </Key>
+          <Property Name="Login" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name_Contragent" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "ProfiDB.dbo.ContragentSAEs" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ContragentSAEs">
+          <Key>
+            <PropertyRef Name="Name_SAE" />
+            <PropertyRef Name="Name_Contragent" />
+            <PropertyRef Name="Material_Base" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="Count" />
+            <PropertyRef Name="Content" />
+            <PropertyRef Name="Result" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="Profi_Point" />
+            <PropertyRef Name="Logo" />
+          </Key>
+          <Property Name="Name_SAE" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name_Contragent" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Material_Base" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Result" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Profi_Point" Type="int" Nullable="false" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Photo_Path" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "ProfiDB.dbo.LogInUsers" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="LogInUsers">
+          <Key>
+            <PropertyRef Name="Login" />
+            <PropertyRef Name="LogInDateTime" />
+          </Key>
+          <Property Name="Login" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LogInDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "ProfiDB.dbo.PhotosSAE" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="PhotosSAE">
+          <Key>
+            <PropertyRef Name="Name_SAE" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="Profi_Point" />
+            <PropertyRef Name="Id_SAE" />
+          </Key>
+          <Property Name="Name_SAE" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Profi_Point" Type="int" Nullable="false" />
+          <Property Name="Photo_Path" Type="nvarchar" MaxLength="100" />
+          <Property Name="Id_SAE" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "ProfiDB.dbo.SAE_Categories" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="SAE_Categories">
+          <Key>
+            <PropertyRef Name="Name_Category" />
+            <PropertyRef Name="Name_SAE" />
+          </Key>
+          <Property Name="Name_Category" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name_SAE" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "ProfiDB.dbo.UserRoles" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="Name_Role" />
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="Name_Role" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_C_User">
+          <End Role="Role_User" Type="Self.Role_User" Multiplicity="1" />
+          <End Role="Contragent_User" Type="Self.Contragent_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role_User">
+              <PropertyRef Name="Id_User" />
+              <PropertyRef Name="Id_Role" />
+            </Principal>
+            <Dependent Role="Contragent_User">
+              <PropertyRef Name="Id_User" />
+              <PropertyRef Name="Id_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contragent">
+          <End Role="Contragent" Type="Self.Contragent" Multiplicity="1" />
+          <End Role="SAE_Contragent" Type="Self.SAE_Contragent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contragent">
+              <PropertyRef Name="Id_Contragent" />
+            </Principal>
+            <Dependent Role="SAE_Contragent">
+              <PropertyRef Name="Id_Contragent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contragent_U">
+          <End Role="Contragent" Type="Self.Contragent" Multiplicity="1" />
+          <End Role="Contragent_User" Type="Self.Contragent_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contragent">
+              <PropertyRef Name="Id_Contragent" />
+            </Principal>
+            <Dependent Role="Contragent_User">
+              <PropertyRef Name="Id_Contragent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LogInJournal">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="LogInJournal" Type="Self.LogInJournal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="LogInJournal">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Role_User" Type="Self.Role_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id_Role" />
+            </Principal>
+            <Dependent Role="Role_User">
+              <PropertyRef Name="Id_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SAE">
+          <End Role="SAE" Type="Self.SAE" Multiplicity="1" />
+          <End Role="SAE_Contragent" Type="Self.SAE_Contragent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SAE">
+              <PropertyRef Name="Id_SAE" />
+            </Principal>
+            <Dependent Role="SAE_Contragent">
+              <PropertyRef Name="Id_SAE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Role_User" Type="Self.Role_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="Role_User">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ProfiDBModelContainer">
+          <EntitySet Name="Contragent" EntityType="Self.Contragent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contragent_User" EntityType="Self.Contragent_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LogInJournal" EntityType="Self.LogInJournal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role_User" EntityType="Self.Role_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SAE" EntityType="Self.SAE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SAE_Contragent" EntityType="Self.SAE_Contragent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="All_Contragents_User" EntityType="Self.All_Contragents_User" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [All_Contragents_User].[Login] AS [Login], 
+    [All_Contragents_User].[Name_Contragent] AS [Name_Contragent]
+    FROM [dbo].[All_Contragents_User] AS [All_Contragents_User]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ContragentSAEs" EntityType="Self.ContragentSAEs" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ContragentSAEs].[Name_SAE] AS [Name_SAE], 
+    [ContragentSAEs].[Name_Contragent] AS [Name_Contragent], 
+    [ContragentSAEs].[Material_Base] AS [Material_Base], 
+    [ContragentSAEs].[Age] AS [Age], 
+    [ContragentSAEs].[Count] AS [Count], 
+    [ContragentSAEs].[Content] AS [Content], 
+    [ContragentSAEs].[Result] AS [Result], 
+    [ContragentSAEs].[Price] AS [Price], 
+    [ContragentSAEs].[Profi_Point] AS [Profi_Point], 
+    [ContragentSAEs].[Logo] AS [Logo], 
+    [ContragentSAEs].[Photo_Path] AS [Photo_Path]
+    FROM [dbo].[ContragentSAEs] AS [ContragentSAEs]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="LogInUsers" EntityType="Self.LogInUsers" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [LogInUsers].[Login] AS [Login], 
+    [LogInUsers].[LogInDateTime] AS [LogInDateTime]
+    FROM [dbo].[LogInUsers] AS [LogInUsers]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PhotosSAE" EntityType="Self.PhotosSAE" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PhotosSAE].[Name_SAE] AS [Name_SAE], 
+    [PhotosSAE].[Price] AS [Price], 
+    [PhotosSAE].[Profi_Point] AS [Profi_Point], 
+    [PhotosSAE].[Photo_Path] AS [Photo_Path], 
+    [PhotosSAE].[Id_SAE] AS [Id_SAE]
+    FROM [dbo].[PhotosSAE] AS [PhotosSAE]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SAE_Categories" EntityType="Self.SAE_Categories" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SAE_Categories].[Name_Category] AS [Name_Category], 
+    [SAE_Categories].[Name_SAE] AS [Name_SAE]
+    FROM [dbo].[SAE_Categories] AS [SAE_Categories]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UserRoles].[Name_Role] AS [Name_Role], 
+    [UserRoles].[Login] AS [Login]
+    FROM [dbo].[UserRoles] AS [UserRoles]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_C_User" Association="Self.FK_C_User">
+            <End Role="Role_User" EntitySet="Role_User" />
+            <End Role="Contragent_User" EntitySet="Contragent_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contragent" Association="Self.FK_Contragent">
+            <End Role="Contragent" EntitySet="Contragent" />
+            <End Role="SAE_Contragent" EntitySet="SAE_Contragent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contragent_U" Association="Self.FK_Contragent_U">
+            <End Role="Contragent" EntitySet="Contragent" />
+            <End Role="Contragent_User" EntitySet="Contragent_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LogInJournal" Association="Self.FK_LogInJournal">
+            <End Role="User" EntitySet="User" />
+            <End Role="LogInJournal" EntitySet="LogInJournal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Role" Association="Self.FK_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Role_User" EntitySet="Role_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SAE" Association="Self.FK_SAE">
+            <End Role="SAE" EntitySet="SAE" />
+            <End Role="SAE_Contragent" EntitySet="SAE_Contragent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User" Association="Self.FK_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Role_User" EntitySet="Role_User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProfiDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Contragent">
+          <Key>
+            <PropertyRef Name="Id_Contragent" />
+          </Key>
+          <Property Name="Id_Contragent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Contragent" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Logo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Role_User" Relationship="Self.Contragent_User" FromRole="Contragent" ToRole="Role_User" />
+          <NavigationProperty Name="SAEs" Relationship="Self.SAE_Contragent" FromRole="Contragent" ToRole="SAE" />
+        </EntityType>
+        <EntityType Name="LogInJournal">
+          <Key>
+            <PropertyRef Name="Id_User" />
+            <PropertyRef Name="LogInDateTime" />
+          </Key>
+          <Property Name="Id_User" Type="Int32" Nullable="false" />
+          <Property Name="LogInDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="Self.FK_LogInJournal" FromRole="LogInJournal" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id_Role" />
+          </Key>
+          <Property Name="Id_Role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Role_User" Relationship="Self.FK_Role" FromRole="Role" ToRole="Role_User" />
+        </EntityType>
+        <EntityType Name="Role_User">
+          <Key>
+            <PropertyRef Name="Id_Role" />
+            <PropertyRef Name="Id_User" />
+          </Key>
+          <Property Name="Id_Role" Type="Int32" Nullable="false" />
+          <Property Name="Id_User" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Role" FromRole="Role_User" ToRole="Role" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User" FromRole="Role_User" ToRole="User" />
+          <NavigationProperty Name="Contragents" Relationship="Self.Contragent_User" FromRole="Role_User" ToRole="Contragent" />
+        </EntityType>
+        <EntityType Name="SAE">
+          <Key>
+            <PropertyRef Name="Id_SAE" />
+          </Key>
+          <Property Name="Id_SAE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_SAE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Material_Base" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Result" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Profi_Point" Type="Int32" Nullable="false" />
+          <Property Name="Photo_Path" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contragents" Relationship="Self.SAE_Contragent" FromRole="SAE" ToRole="Contragent" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id_User" />
+          </Key>
+          <Property Name="Id_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FIO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LogInJournals" Relationship="Self.FK_LogInJournal" FromRole="User" ToRole="LogInJournal" />
+          <NavigationProperty Name="Role_User" Relationship="Self.FK_User" FromRole="User" ToRole="Role_User" />
+        </EntityType>
+        <EntityType Name="All_Contragents_User">
+          <Key>
+            <PropertyRef Name="Login" />
+            <PropertyRef Name="Name_Contragent" />
+          </Key>
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name_Contragent" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContragentSAE">
+          <Key>
+            <PropertyRef Name="Name_SAE" />
+            <PropertyRef Name="Name_Contragent" />
+            <PropertyRef Name="Material_Base" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="Count" />
+            <PropertyRef Name="Content" />
+            <PropertyRef Name="Result" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="Profi_Point" />
+            <PropertyRef Name="Logo" />
+          </Key>
+          <Property Name="Name_SAE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name_Contragent" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Material_Base" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Result" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Profi_Point" Type="Int32" Nullable="false" />
+          <Property Name="Logo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Photo_Path" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LogInUser">
+          <Key>
+            <PropertyRef Name="Login" />
+            <PropertyRef Name="LogInDateTime" />
+          </Key>
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LogInDateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="PhotosSAE">
+          <Key>
+            <PropertyRef Name="Name_SAE" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="Profi_Point" />
+            <PropertyRef Name="Id_SAE" />
+          </Key>
+          <Property Name="Name_SAE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Profi_Point" Type="Int32" Nullable="false" />
+          <Property Name="Photo_Path" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Id_SAE" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SAE_Categories">
+          <Key>
+            <PropertyRef Name="Name_Category" />
+            <PropertyRef Name="Name_SAE" />
+          </Key>
+          <Property Name="Name_Category" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name_SAE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Name_Role" />
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="Name_Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_LogInJournal">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="LogInJournal" Type="Self.LogInJournal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="LogInJournal">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Role_User" Type="Self.Role_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id_Role" />
+            </Principal>
+            <Dependent Role="Role_User">
+              <PropertyRef Name="Id_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Role_User" Type="Self.Role_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="Role_User">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Contragent_User">
+          <End Role="Role_User" Type="Self.Role_User" Multiplicity="*" />
+          <End Role="Contragent" Type="Self.Contragent" Multiplicity="*" />
+        </Association>
+        <Association Name="SAE_Contragent">
+          <End Role="Contragent" Type="Self.Contragent" Multiplicity="*" />
+          <End Role="SAE" Type="Self.SAE" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ProfiDBEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Contragents" EntityType="Self.Contragent" />
+          <EntitySet Name="LogInJournals" EntityType="Self.LogInJournal" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Role_User" EntityType="Self.Role_User" />
+          <EntitySet Name="SAEs" EntityType="Self.SAE" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="All_Contragents_User" EntityType="Self.All_Contragents_User" />
+          <EntitySet Name="ContragentSAEs" EntityType="Self.ContragentSAE" />
+          <EntitySet Name="LogInUsers" EntityType="Self.LogInUser" />
+          <EntitySet Name="PhotosSAEs" EntityType="Self.PhotosSAE" />
+          <EntitySet Name="SAE_Categories" EntityType="Self.SAE_Categories" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <AssociationSet Name="FK_LogInJournal" Association="Self.FK_LogInJournal">
+            <End Role="User" EntitySet="Users" />
+            <End Role="LogInJournal" EntitySet="LogInJournals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Role" Association="Self.FK_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Role_User" EntitySet="Role_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User" Association="Self.FK_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Role_User" EntitySet="Role_User" />
+          </AssociationSet>
+          <AssociationSet Name="Contragent_User" Association="Self.Contragent_User">
+            <End Role="Role_User" EntitySet="Role_User" />
+            <End Role="Contragent" EntitySet="Contragents" />
+          </AssociationSet>
+          <AssociationSet Name="SAE_Contragent" Association="Self.SAE_Contragent">
+            <End Role="Contragent" EntitySet="Contragents" />
+            <End Role="SAE" EntitySet="SAEs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ProfiDBModelContainer" CdmEntityContainer="ProfiDBEntities2">
+          <EntitySetMapping Name="Contragents">
+            <EntityTypeMapping TypeName="ProfiDBModel.Contragent">
+              <MappingFragment StoreEntitySet="Contragent">
+                <ScalarProperty Name="Id_Contragent" ColumnName="Id_Contragent" />
+                <ScalarProperty Name="Name_Contragent" ColumnName="Name_Contragent" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LogInJournals">
+            <EntityTypeMapping TypeName="ProfiDBModel.LogInJournal">
+              <MappingFragment StoreEntitySet="LogInJournal">
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+                <ScalarProperty Name="LogInDateTime" ColumnName="LogInDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="ProfiDBModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id_Role" ColumnName="Id_Role" />
+                <ScalarProperty Name="Name_Role" ColumnName="Name_Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role_User">
+            <EntityTypeMapping TypeName="ProfiDBModel.Role_User">
+              <MappingFragment StoreEntitySet="Role_User">
+                <ScalarProperty Name="Id_Role" ColumnName="Id_Role" />
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAEs">
+            <EntityTypeMapping TypeName="ProfiDBModel.SAE">
+              <MappingFragment StoreEntitySet="SAE">
+                <ScalarProperty Name="Id_SAE" ColumnName="Id_SAE" />
+                <ScalarProperty Name="Name_SAE" ColumnName="Name_SAE" />
+                <ScalarProperty Name="Material_Base" ColumnName="Material_Base" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Profi_Point" ColumnName="Profi_Point" />
+                <ScalarProperty Name="Photo_Path" ColumnName="Photo_Path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ProfiDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ProfiDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="All_Contragents_User">
+            <EntityTypeMapping TypeName="ProfiDBModel.All_Contragents_User">
+              <MappingFragment StoreEntitySet="All_Contragents_User">
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Name_Contragent" ColumnName="Name_Contragent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContragentSAEs">
+            <EntityTypeMapping TypeName="ProfiDBModel.ContragentSAE">
+              <MappingFragment StoreEntitySet="ContragentSAEs">
+                <ScalarProperty Name="Name_SAE" ColumnName="Name_SAE" />
+                <ScalarProperty Name="Name_Contragent" ColumnName="Name_Contragent" />
+                <ScalarProperty Name="Material_Base" ColumnName="Material_Base" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Profi_Point" ColumnName="Profi_Point" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Photo_Path" ColumnName="Photo_Path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LogInUsers">
+            <EntityTypeMapping TypeName="ProfiDBModel.LogInUser">
+              <MappingFragment StoreEntitySet="LogInUsers">
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="LogInDateTime" ColumnName="LogInDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhotosSAEs">
+            <EntityTypeMapping TypeName="ProfiDBModel.PhotosSAE">
+              <MappingFragment StoreEntitySet="PhotosSAE">
+                <ScalarProperty Name="Name_SAE" ColumnName="Name_SAE" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Profi_Point" ColumnName="Profi_Point" />
+                <ScalarProperty Name="Photo_Path" ColumnName="Photo_Path" />
+                <ScalarProperty Name="Id_SAE" ColumnName="Id_SAE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAE_Categories">
+            <EntityTypeMapping TypeName="ProfiDBModel.SAE_Categories">
+              <MappingFragment StoreEntitySet="SAE_Categories">
+                <ScalarProperty Name="Name_Category" ColumnName="Name_Category" />
+                <ScalarProperty Name="Name_SAE" ColumnName="Name_SAE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="ProfiDBModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRoles">
+                <ScalarProperty Name="Name_Role" ColumnName="Name_Role" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Contragent_User" TypeName="ProfiDBModel.Contragent_User" StoreEntitySet="Contragent_User">
+            <EndProperty Name="Role_User">
+              <ScalarProperty Name="Id_Role" ColumnName="Id_Role" />
+              <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+            </EndProperty>
+            <EndProperty Name="Contragent">
+              <ScalarProperty Name="Id_Contragent" ColumnName="Id_Contragent" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SAE_Contragent" TypeName="ProfiDBModel.SAE_Contragent" StoreEntitySet="SAE_Contragent">
+            <EndProperty Name="Contragent">
+              <ScalarProperty Name="Id_Contragent" ColumnName="Id_Contragent" />
+            </EndProperty>
+            <EndProperty Name="SAE">
+              <ScalarProperty Name="Id_SAE" ColumnName="Id_SAE" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

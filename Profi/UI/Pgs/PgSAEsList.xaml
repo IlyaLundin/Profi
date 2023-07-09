@@ -1,0 +1,91 @@
+﻿<Page x:Class="Profi.UI.Pgs.PgSAEsList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Profi.UI.Pgs"
+      mc:Ignorable="d" 
+     d:DesignHeight="600" d:DesignWidth="1400"
+      Title="PgSAEs" IsVisibleChanged="Page_IsVisibleChanged">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="380"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Style="{StaticResource TextBlockLabel}" Background="#ffe4b5" HorizontalAlignment="Left" Width="500" Height="100" Panel.ZIndex="-1" FontSize="40" Margin="10,0,0,0" Text="Нет результатов поиска!"></TextBlock>
+
+        <ListBox SelectionMode="Multiple" Name="SAEList" ItemsSource="{Binding SAE}" Background="#ffe4b5" HorizontalContentAlignment="Center">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="235" Width="800" Margin="20" Background="#ffa07a" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Height="200" Margin="10">
+                            <Image.Source>
+                                <Binding Path="Photo_Path">
+                                    <Binding.TargetNullValue>
+                                        <ImageSource>
+                                            /Resources/Images/nophoto.png
+                                        </ImageSource>
+                                    </Binding.TargetNullValue>
+                                </Binding>
+                            </Image.Source>
+
+                        </Image>
+                        <StackPanel Margin="10" Grid.Column="1">
+
+                            <StackPanel Orientation="Horizontal" Margin="10">
+                                <TextBlock Text="Название: " FontSize="21" FontFamily="Comic Sans MS"></TextBlock>
+                                <TextBlock Name="TblSAEName" Width="450" Margin="4" Text="{Binding Name_SAE}" FontSize="18" FontFamily="Comic Sans MS"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10">
+                                <TextBlock Text="Стоимость: " FontSize="21" FontFamily="Comic Sans MS"></TextBlock>
+                                <TextBlock Name="TblPrice" Width="450" Margin="4" Text="{Binding Price}" FontSize="18" FontFamily="Comic Sans MS"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10">
+                                <TextBlock Text="Профи-баллы: " FontSize="21" FontFamily="Comic Sans MS"></TextBlock>
+                                <TextBlock Name="TblProfi" Width="450" Margin="4" Text="{Binding Profi_Point}" FontSize="18" FontFamily="Comic Sans MS"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10">
+                                <Button Style="{StaticResource ButtonMain}" Name="BtnEditSAE" Margin="10" Click="BtnEditSAE_Click">Изменить</Button>
+                                <Button Style="{StaticResource ButtonMain}" Name="BtnOpenSAE" Margin="10" Click="BtnOpenSAE_Click">Открыть</Button>
+                            </StackPanel>
+                        </StackPanel>
+
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Column="1" Grid.RowSpan="4" Background="#ffa07a">
+            <TextBlock Style="{StaticResource TextBlockMain}" FontSize="40">Поиск по</TextBlock>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource TextBlockMain}" Margin="20" HorizontalAlignment="Left">Стоимости</TextBlock>
+                <ComboBox Name="CbxPrice" Height="30" Width="150" FontSize="16" SelectionChanged="CbxPrice_SelectionChanged" SelectedValue="По умолчанию"></ComboBox>
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource TextBlockMain}" Margin="20" HorizontalAlignment="Left">Профи-баллам</TextBlock>
+                <ComboBox Name="CbxProfi" Height="30" Width="150" FontSize="16" SelectionChanged="CbxProfi_SelectionChanged" SelectedValue="По умолчанию"></ComboBox>
+
+            </StackPanel>
+        </StackPanel>
+
+        <TextBox Name="Search" FontSize="21" TextChanged="Search_TextChanged" Grid.Column="1" Height="40" ToolTip="Поиск по названию СДО" Grid.Row="1" Style="{StaticResource TextBoxMain}" VerticalAlignment="Bottom" Margin="10"></TextBox>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Background="#ffe4b5">
+            <Button Style="{StaticResource ButtonMain}" Margin="10" Visibility="Collapsed" Name="BtnAddSAE" Click="BtnAddSAE_Click">Добавить</Button>
+            <Button Style="{StaticResource ButtonMain}" Margin="10" Visibility="Collapsed" Name="BtnDeleteSAE" Click="BtnDeleteSAE_Click">Удалить</Button>
+            <Button Style="{StaticResource ButtonMain}" Margin="10" Name="BtnContragent" Click="BtnContragent_Click">Контрагенты</Button>
+        </StackPanel>
+    </Grid>
+</Page>

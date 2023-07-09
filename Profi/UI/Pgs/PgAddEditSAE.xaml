@@ -1,0 +1,72 @@
+﻿<Page x:Class="Profi.UI.Pgs.PgAddEditSAE"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Profi.UI.Pgs"
+      mc:Ignorable="d" 
+      d:DesignHeight="780" d:DesignWidth="1400"
+      Title="PgAddEditSAE">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ScrollViewer>
+            <StackPanel Background="#ffe4b5">
+                <StackPanel HorizontalAlignment="Center" Margin="30" Background="#ffa07a">
+                    <StackPanel Orientation="Horizontal" Background="#ffa07a" Height="240" Width="820" >
+                        <Grid Width="400">
+                            <Image Name="NewPicture" HorizontalAlignment="Right" Margin="20" Height="200" Width="200">
+                                <Image.Source>
+                                    <Binding Path="Photo_Path">
+                                        <Binding.TargetNullValue>
+                                            <ImageSource>
+                                                /Resources/Images/nophoto.png
+                                            </ImageSource>
+                                        </Binding.TargetNullValue>
+                                    </Binding>
+                                </Image.Source>
+                            </Image>
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Background="#ffa07a">
+                        <TextBlock Style="{StaticResource TextBlockLabel}" Text="Название СДО:  "></TextBlock>
+                        <TextBox Style="{StaticResource TextBoxLabel}" Name="TblNameSAE" Text="{Binding Name_SAE}"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Background="#ffa07a">
+                        <TextBlock Style="{StaticResource TextBlockLabel}" Padding="0,40,0,0" Height="120" Text="Матеариально-техническая база:  "></TextBlock>
+                        <TextBox TextWrapping="Wrap" Style="{StaticResource TextBoxLabel}" Height="120" Text="{Binding Material_Base}" Name="TblMaterialBase"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Background="#ffa07a">
+                        <TextBlock Style="{StaticResource TextBlockLabel}"  Text="Возраст учащихся:  "></TextBlock>
+                        <TextBox Style="{StaticResource TextBoxLabel}" Text="{Binding Age}" Name="TblAge"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Background="#ffa07a">
+                        <TextBlock Style="{StaticResource TextBlockLabel}" Text="Количество учащихся в группе:  "></TextBlock>
+                        <TextBox Style="{StaticResource TextBoxLabel}" Text="{Binding Count}" Name="TblCount"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Background="#ffa07a">
+                        <TextBlock Style="{StaticResource TextBlockLabel}" Padding="0,40,0,0" Height="120" Text="Описание программы:  "></TextBlock>
+                        <TextBox TextWrapping="Wrap" Style="{StaticResource TextBoxLabel}" Height="120" Text="{Binding Content}" Name="TblContent"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Background="#ffa07a">
+                        <TextBlock Style="{StaticResource TextBlockLabel}" Padding="0,40,0,0" Height="120" Text="Цели программы:  "></TextBlock>
+                        <TextBox Style="{StaticResource TextBoxLabel}" Height="120" Text="{Binding Result}" Name="TblResult"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Background="#ffa07a">
+                        <TextBlock Style="{StaticResource TextBlockLabel}" Text="Цена:  "></TextBlock>
+                        <TextBox Style="{StaticResource TextBoxLabel}" Name="TblPrice" Text="{Binding Price}"></TextBox>
+                    </StackPanel>
+                    
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Background="#ffe4b5" Name="StackButtons" Orientation="Horizontal" Grid.Row="1">
+            <Button Style="{StaticResource ButtonMain}" Margin="10" Name="BtnSaveSAE" Click="BtnSaveSAE_Click">Сохранить</Button>
+            <Button Style="{StaticResource ButtonMain}" Margin="10" Name="BtnCancelSAE" Click="BtnCancelSAE_Click">Отменить</Button>
+        </StackPanel>
+    </Grid>
+</Page>

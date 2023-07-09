@@ -1,0 +1,67 @@
+﻿<Page x:Class="Profi.UI.Pgs.PgContragent"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Profi.UI.Pgs"
+      mc:Ignorable="d" 
+       d:DesignHeight="780" d:DesignWidth="1400"
+      Title="PgContragent">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer >
+            <StackPanel Background="#ffe4b5" Width="1384">
+                <StackPanel HorizontalAlignment="Center" Margin="10" Background="#ffa07a">
+                    <StackPanel Orientation="Horizontal" Background="#ffa07a" Height="220" Width="820" >
+                        <Grid Width="400">
+                            <Image HorizontalAlignment="Right" Margin="10" Height="200" Width="200">
+                                <Image.Source>
+                                    <Binding Path="Logo">
+                                        <Binding.TargetNullValue>
+                                            <ImageSource>
+                                                /Resources/Images/nophoto.png
+                                            </ImageSource>
+                                        </Binding.TargetNullValue>
+                                    </Binding>
+                                </Image.Source>
+                            </Image>
+                        </Grid>
+
+
+
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Horizontal" Background="#ffa07a">
+                        <TextBlock Style="{StaticResource TextBlockLabel}" Text="Название:  "></TextBlock>
+                        <TextBlock Style="{StaticResource TextBlockLabel}" Name="TblNameContragent" TextAlignment="Left" Text="{Binding Name_Contragent}"></TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Background="#ffa07a">
+                        <TextBlock Style="{StaticResource TextBlockLabel}"  Text="Эл.почта:  "></TextBlock>
+                        <TextBlock Style="{StaticResource TextBlockLabel}" Text="{Binding Email}" TextAlignment="Left" Name="TblEmail"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Background="#ffa07a">
+                        <TextBlock Style="{StaticResource TextBlockLabel}" Text="Телефон:  "></TextBlock>
+                        <TextBlock Style="{StaticResource TextBlockLabel}" Text="{Binding Phone}" TextAlignment="Left" Name="TblPhone"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Background="#ffa07a">
+                        <TextBlock Style="{StaticResource TextBlockLabel}" Height="40" Text="Адрес:  "></TextBlock>
+                        <TextBlock Style="{StaticResource TextBlockLabel}" Height="40" Text="{Binding Address}" TextAlignment="Left" Name="TblAddress"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Background="#ffa07a">
+                        <TextBlock Style="{StaticResource TextBlockLabel}" Padding="0,40,0,0" Height="120" Text="Описание:  "></TextBlock>
+                        <TextBlock Style="{StaticResource TextBlockLabel}" Height="120" Text="{Binding Description}" TextWrapping="Wrap" TextAlignment="Left" Name="TblDescription"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Background="#ffe4b5" Name="StackButtons" Orientation="Horizontal" Grid.Row="1" >
+        </StackPanel>
+    </Grid>
+</Page>
